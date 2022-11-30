@@ -1,8 +1,8 @@
 #ifndef ALIGNED_ALLOCATOR_H
 #define ALIGNED_ALLOCATOR_H
 
-#include <cstddef>
 #include <memory>
+#include <stdlib.h>
 
 // (zqr):
 // A minimal implementation of an alloactor for C++ Standard Library, which
@@ -13,7 +13,7 @@
 //    documentation about Allocators and allocator class.
 template <typename T> class AlignedAllocator {
 public:
-  typedef T value_type;
+  using value_type = T;
 
 public:
   // According to Microsoft's documentation, default ctor is not required
