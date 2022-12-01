@@ -9,13 +9,13 @@
 int main() {
   using std::cout;
   using std::endl;
-  using my_string =
-      std::basic_string<char, std::char_traits<char>, AlignedAllocator<char>>;
 
-  // The buffer is a C++ string with a 512-byte aligned char buffer.
-  // The alignment is required by O_DIRECT.
+  // my_string is a C++ string with a 512-byte aligned char buffer.
+  // O_DIRECT requires 512-byte alignment.
   // Note that std::string is a type alias for
   //    std::basic_string<char, std::char_traits<char>, std::allocator<char>>
+  using my_string = std::basic_string<char, std::char_traits<char>,
+                                      AlignedAllocator<char, 512>>;
   my_string buf{};
 
   // Note that since in the initialization step no argument was given, the buf
@@ -49,7 +49,7 @@ int main() {
   close(fd);
 
   // also works with std::vector
-  std::vector<uint32_t, AlignedAllocator<uint32_t>> my_vec{};
+  std::vector<uint32_t, AlignedAllocator<uint32_t, 512>> my_vec{};
   my_vec.resize(50);
   cout << "Buffer address: " << (uint64_t)my_vec.data()
        << ", address % 512 = " << (uint64_t)my_vec.data() % 512 << endl;
