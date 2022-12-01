@@ -9,9 +9,10 @@ See test.cpp for typical usage.
 Create a string which holds 512-byte alligned buffer.
 
 ```cpp
-    using aligned_str = std::basic_string<char, std::char_traits<char>, AlignedAllocator<char, 512>>;
-    my_string buf{};
-    buf.clear();
-    buf.append(1024, 'z');
+  using aligned_str = std::basic_string<char, std::char_traits<char>, AlignedAllocator<char, 512>>;
+  aligned_str buf{};
+  buf.clear();
+  buf.append(1024, 'z');
+  std::cout << "Buffer address: " << (uint64_t)buf.data() << ", address % 512 = " << (uint64_t)buf.data() % 512 << std::endl;
     ...
 ```
