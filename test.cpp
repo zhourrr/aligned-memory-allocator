@@ -1,10 +1,10 @@
-#include "aligned_allocator.h"
-#include <cstdint>
 #include <fcntl.h>
+#include <unistd.h>
+#include <cstdint>
 #include <iostream>
 #include <string>
-#include <unistd.h>
 #include <vector>
+#include "aligned_allocator.h"
 
 int main() {
   using std::cout;
