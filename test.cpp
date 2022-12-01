@@ -39,7 +39,7 @@ int main() {
 
   // Test direct I/O
   auto filename = "output";
-  auto fd = ::open(filename, O_RDWR | O_CREAT);
+  auto fd = ::open(filename, O_RDWR | O_CREAT | O_DIRECT);
   auto write_size = ::write(fd, buf.data(), buf.size());
   if (write_size < 0) {
     cout << "error: " << errno << endl;
