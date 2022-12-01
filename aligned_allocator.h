@@ -25,24 +25,28 @@ public:
 
   template <typename U>
   inline bool operator==(const AlignedAllocator<U> &other) const noexcept {
-    return (this == &other);
+    return true;
   }
 
   template <typename U>
   inline bool operator!=(const AlignedAllocator<U> &other) const noexcept {
-    return (this != &other);
+    return false;
   }
 
   inline value_type *allocate(const std::size_t n) const {
     value_type *ptr;
     // 512-byte aligned
-    auto ret = posix_memalign((void **)&ptr, 512, n);
+    auto ret = posix_memalign((void **)&ptr, 512, sizeof(T) * n);
     if (ret != 0)
       throw std::bad_alloc();
     return ptr;
   };
 
-  inline void deallocate(value_type *const ptr, std::size_t) const noexcept {
+  inline value_type *allocate(const std::size_t n, const void *hint) {
+    return allocate(n);
+  }
+
+  inline void deallocate(value_type *const ptr, std::size_t n) const noexcept {
     free(ptr);
   }
 };

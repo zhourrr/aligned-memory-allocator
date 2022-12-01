@@ -50,7 +50,12 @@ int main() {
 
   // also works with std::vector
   std::vector<uint32_t, AlignedAllocator<uint32_t>> my_vec{};
-  my_vec.reserve(5000);
+  my_vec.resize(50);
+  cout << "Buffer address: " << (uint64_t)my_vec.data()
+       << ", address % 512 = " << (uint64_t)my_vec.data() % 512 << endl;
+
+  for (int i = 0; i < 1024 * 1024 * 2; ++i)
+    my_vec.push_back(i);
   cout << "Buffer address: " << (uint64_t)my_vec.data()
        << ", address % 512 = " << (uint64_t)my_vec.data() % 512 << endl;
 }
