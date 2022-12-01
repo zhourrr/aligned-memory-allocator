@@ -40,8 +40,14 @@ public:
   };
 
   inline value_type *allocate(const std::size_t n) const {
+    auto size = n;
+    /*
+      if you wish the allocated buffer size to also be aligned to alignment,
+      uncomment the following statement
+    */
+    // size = (n + alignment - 1) / alignment * alignment;
     value_type *ptr;
-    auto ret = posix_memalign((void **)&ptr, alignment, sizeof(T) * n);
+    auto ret = posix_memalign((void **)&ptr, alignment, sizeof(T) * size);
     if (ret != 0)
       throw std::bad_alloc();
     return ptr;
