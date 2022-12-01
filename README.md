@@ -11,7 +11,7 @@ Create a string which holds 512-byte aligned buffer.
 ```cpp
   using aligned_str = std::basic_string<char, std::char_traits<char>, AlignedAllocator<char, 512>>;
   aligned_str buf{};
-  buf.clear();
+  buf.reserve(10);
   
   buf.append(1024, 'z');
   // print the buffer address
