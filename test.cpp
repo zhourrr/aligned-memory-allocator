@@ -20,7 +20,7 @@ int main() {
 
   // Note that since in the initialization step no argument was given, the buf
   // is empty and the custom allocate function was not called, the current
-  // buffer is not aligned.
+  // buffer is not aligned (search for Short String Optimization for details).
   cout << "Buffer address:" << (uint64_t)buf.data()
        << ", address % 512 = " << (uint64_t)buf.data() % 512 << endl;
 
