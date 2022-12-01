@@ -6,7 +6,7 @@ In another project, I was given a std::string as a buffer, and I had to use Linu
 
 See test.cpp for typical usage.
 
-Create a string which holds 512-byte alligned buffer.
+Create a string which holds 512-byte aligned buffer.
 
 ```cpp
   using aligned_str = std::basic_string<char, std::char_traits<char>, AlignedAllocator<char, 512>>;
