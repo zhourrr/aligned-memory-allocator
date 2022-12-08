@@ -1,8 +1,8 @@
 #ifndef ALIGNED_ALLOCATOR_H
 #define ALIGNED_ALLOCATOR_H
 
-#include <stdlib.h>
 #include <memory>
+#include <stdlib.h>
 
 // (zqr):
 // A minimal implementation of an alloactor for C++ Standard Library, which
@@ -11,12 +11,11 @@
 //    A minimal custom allocator is preferred because C++ allocator_traits class
 //    provides default implementation for you. Take a look at Microsoft's
 //    documentation about Allocators and allocator class.
-template <typename T, std::size_t alignment>
-class AlignedAllocator {
- public:
+template <typename T, std::size_t alignment> class AlignedAllocator {
+public:
   using value_type = T;
 
- public:
+public:
   // According to Microsoft's documentation, default ctor is not required
   // by C++ Standard Library.
   AlignedAllocator() noexcept {};
@@ -25,19 +24,18 @@ class AlignedAllocator {
   AlignedAllocator(const AlignedAllocator<U, alignment>& other) noexcept {};
 
   template <typename U>
-  inline bool operator==(
-      const AlignedAllocator<U, alignment>& other) const noexcept {
+  inline bool
+  operator==(const AlignedAllocator<U, alignment>& other) const noexcept {
     return true;
   }
 
   template <typename U>
-  inline bool operator!=(
-      const AlignedAllocator<U, alignment>& other) const noexcept {
+  inline bool
+  operator!=(const AlignedAllocator<U, alignment>& other) const noexcept {
     return false;
   }
 
-  template <typename U>
-  struct rebind {
+  template <typename U> struct rebind {
     using other = AlignedAllocator<U, alignment>;
   };
 
